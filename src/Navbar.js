@@ -18,7 +18,7 @@ class Navbar extends Component {
         <AppBar position="static" color="primary">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit">
-              <span>🇫🇷</span>
+              <span role="img" aria-label="France">🇫🇷</span>
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit">
               Title
