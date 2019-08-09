@@ -1,7 +1,6 @@
 import React, { Component, createContext } from "react";
 
 const LanguageContext = createContext();
-// const { Provider, Consumer } = createContext();
 
 class LanguageProvider extends Component {
   constructor(props) {
@@ -11,7 +10,7 @@ class LanguageProvider extends Component {
     };
   }
 
-  setLanguage = ({target}) => {
+  setLanguage = ({ target }) => {
     const newLanguage = target.value;
     newLanguage !== this.state.language &&
       this.setState({
@@ -30,11 +29,4 @@ class LanguageProvider extends Component {
   }
 }
 
-const withLanguageContext = Component => props => (
-  <LanguageContext.Consumer>
-    {context => <Component languageContext={context} {...props} />}
-  </LanguageContext.Consumer>
-)
-
-// export { Consumer, ThemeProvider };
-export { LanguageContext, LanguageProvider, withLanguageContext };
+export { LanguageContext, LanguageProvider };

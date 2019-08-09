@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,75 +9,63 @@ import Switch from "@material-ui/core/Switch";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/NavbarStyles";
 import { ThemeContext } from "./contexts/ThemeContext";
-import { withLanguageContext } from "./contexts/LanguageContext";
+import { LanguageContext } from "./contexts/LanguageContext";
 
 const content = {
   english: {
     search: "Search",
-    flag: "🇬🇧",
+    flag: "🇬🇧"
   },
   french: {
     search: "Chercher",
-    flag: "🇫🇷",
+    flag: "🇫🇷"
   },
   spanish: {
     search: "Buscar",
-    flag: "🇪🇸",
+    flag: "🇪🇸"
   },
   russian: {
     search: "Поиск",
-    flag: "🇷🇺",
+    flag: "🇷🇺"
   }
 };
 
-class Navbar extends Component {
-  // экспериментальный синтаксис
-  static contextType = ThemeContext;
+const Navbar = props => {
+  const { isDark, toggleTheme } = useContext(ThemeContext);
+  const { language } = useContext(LanguageContext);
+  const { classes } = props;
+  const { search, flag } = content[language];
 
-  render() {
-    const { isDark, toggleTheme } = this.context;
-    const { classes, languageContext } = this.props;
-    const { language } = languageContext;
-    const { search, flag } = content[language];
-
-    return (
-      <div className={classes.root}>
-            <AppBar position="static" color={isDark ? "default" : "primary"}>
-              <Toolbar>
-                <IconButton className={classes.menuButton} color="inherit">
-                  <span role="img" aria-label={language}>
-                    {flag}
-                  </span>
-                </IconButton>
-                <Typography
-                  className={classes.title}
-                  variant="h6"
-                  color="inherit"
-                >
-                  App Title
-                </Typography>
-                <Switch onChange={toggleTheme} />
-                <div className={classes.grow} />
-                <div className={classes.search}>
-                  <div className={classes.searchIcon}>
-                    <SearchIcon />
-                  </div>
-                  <InputBase
-                    placeholder={`${search}...`}
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.input
-                    }}
-                  />
-                </div>
-              </Toolbar>
-            </AppBar>
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" color={isDark ? "default" : "primary"}>
+        <Toolbar>
+          <IconButton className={classes.menuButton} color="inherit">
+            <span role="img" aria-label={language}>
+              {flag}
+            </span>
+          </IconButton>
+          <Typography className={classes.title} variant="h6" color="inherit">
+            App Title
+          </Typography>
+          <Switch onChange={toggleTheme} />
+          <div className={classes.grow} />
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder={`${search}...`}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.input
+              }}
+            />
           </div>
-    );
-  }
-}
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
 
-// стандартный синтаксис
-// Navbar.contextType = ThemeContext;
-
-export default withLanguageContext(withStyles(styles)(Navbar));
+export default withStyles(styles)(Navbar);

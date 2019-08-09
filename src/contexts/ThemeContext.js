@@ -1,7 +1,6 @@
 import React, { Component, createContext } from "react";
 
 const ThemeContext = createContext();
-// const { Provider, Consumer } = createContext();
 
 class ThemeProvider extends Component {
   constructor(props) {
@@ -22,13 +21,10 @@ class ThemeProvider extends Component {
       <ThemeContext.Provider
         value={{ ...this.state, toggleTheme: this.toggleTheme }}
       >
-        {/* <Provider value={{ ...this.state }}> */}
         {this.props.children}
-        {/* </Provider> */}
       </ThemeContext.Provider>
     );
   }
 }
 
-// export { Consumer, ThemeProvider };
 export { ThemeContext, ThemeProvider };
