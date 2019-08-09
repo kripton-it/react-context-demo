@@ -8,17 +8,24 @@ import SearchIcon from "@material-ui/icons/Search";
 import Switch from "@material-ui/core/Switch";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/NavbarStyles";
+import { ThemeContext } from "./contexts/ThemeContext";
 
 class Navbar extends Component {
+  // экспериментальный синтаксис
+  static contextType = ThemeContext;
+
   render() {
     const { classes } = this.props;
+    const { isDark } = this.context;
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" color="primary">
+        <AppBar position="static" color={isDark ? "default" : "primary"}>
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit">
-              <span role="img" aria-label="France">🇫🇷</span>
+              <span role="img" aria-label="France">
+                🇫🇷
+              </span>
             </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit">
               Title
@@ -43,5 +50,8 @@ class Navbar extends Component {
     );
   }
 }
+
+// стандартный синтаксис
+// Navbar.contextType = ThemeContext;
 
 export default withStyles(styles)(Navbar);
