@@ -9,6 +9,7 @@ import Switch from "@material-ui/core/Switch";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles/NavbarStyles";
 import { ThemeContext } from "./contexts/ThemeContext";
+import { LanguageContext } from "./contexts/LanguageContext";
 
 class Navbar extends Component {
   // экспериментальный синтаксис
@@ -19,34 +20,42 @@ class Navbar extends Component {
     const { isDark, toggleTheme } = this.context;
 
     return (
-      <div className={classes.root}>
-        <AppBar position="static" color={isDark ? "default" : "primary"}>
-          <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit">
-              <span role="img" aria-label="France">
-                🇫🇷
-              </span>
-            </IconButton>
-            <Typography className={classes.title} variant="h6" color="inherit">
-              Title
-            </Typography>
-            <Switch onChange={toggleTheme} />
-            <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search..."
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.input
-                }}
-              />
-            </div>
-          </Toolbar>
-        </AppBar>
-      </div>
+      <LanguageContext.Consumer>
+        {({ language }) => (
+          <div className={classes.root}>
+            <AppBar position="static" color={isDark ? "default" : "primary"}>
+              <Toolbar>
+                <IconButton className={classes.menuButton} color="inherit">
+                  <span role="img" aria-label="France">
+                    🇫🇷
+                  </span>
+                </IconButton>
+                <Typography
+                  className={classes.title}
+                  variant="h6"
+                  color="inherit"
+                >
+                  {language}
+                </Typography>
+                <Switch onChange={toggleTheme} />
+                <div className={classes.grow} />
+                <div className={classes.search}>
+                  <div className={classes.searchIcon}>
+                    <SearchIcon />
+                  </div>
+                  <InputBase
+                    placeholder="Search..."
+                    classes={{
+                      root: classes.inputRoot,
+                      input: classes.input
+                    }}
+                  />
+                </div>
+              </Toolbar>
+            </AppBar>
+          </div>
+        )}
+      </LanguageContext.Consumer>
     );
   }
 }
