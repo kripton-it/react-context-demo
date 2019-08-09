@@ -45,7 +45,7 @@ const content = {
 
 const Form = props => {
   const { classes } = props;
-  const { language, setLanguage } = useContext(LanguageContext);
+  const { language, changeLanguage } = useContext(LanguageContext);
   const { email, signIn, password, remember } = content[language];
 
   return (
@@ -55,7 +55,7 @@ const Form = props => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant="h5">{signIn}</Typography>
-        <Select value={language} onChange={setLanguage}>
+        <Select value={language} onChange={changeLanguage}>
           <MenuItem value="english">English</MenuItem>
           <MenuItem value="french">French</MenuItem>
           <MenuItem value="spanish">Spanish</MenuItem>
