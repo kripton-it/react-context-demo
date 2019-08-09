@@ -17,7 +17,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "./styles/FormStyles";
 import { LanguageContext } from "./contexts/LanguageContext";
 
-const words = {
+const content = {
   english: {
     email: "Email",
     signIn: "Sign In",
@@ -50,7 +50,7 @@ class Form extends Component {
   render() {
     const { classes } = this.props;
     const { language, setLanguage } = this.context;
-    const { email, signIn, password, remember } = words[language];
+    const { email, signIn, password, remember } = content[language];
 
     return (
       <main className={classes.main}>
